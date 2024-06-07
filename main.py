@@ -1,6 +1,6 @@
 import pygame as pg
 import moderngl as mgl
-import sys
+import sys 
 
 from model import *
 from camera import Camera
@@ -19,9 +19,10 @@ class GraphicsEngine():
         pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
 
         self.ctx = mgl.create_context()
+        self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
 
         self.clock = pg.time.Clock()
-        self.time = 0
+        self.time = 0 
         #camara
         self.camera = Camera(self)
         #escena
