@@ -10,7 +10,7 @@ class Cube:
         self.shader_program = self.get_shader_program('default')
         self.vao = self.get_vao()
         self.m_model = self.get_model_matrix()
-        self.texture = self.get_texture('textures/texturalol.png')
+        self.texture = self.get_texture('textures/Madera.png')
         self.on_init()
 
     def get_texture(self, path):
@@ -23,6 +23,8 @@ class Cube:
     def update(self):
         m_model = glm.rotate(self.m_model,self.app.time, glm.vec3(0,1,0))
         self.shader_program['m_model'].write(m_model)
+        self.shader_program['m_view'].write(self.app.camera.m_view)
+
 
     def get_model_matrix(self):
         m_model = glm.mat4()
@@ -51,26 +53,36 @@ class Cube:
         return vao
 
     def get_vertex_data(self):
-        vertices = [(-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1),(-1,1,-1),(-1,-1,-1),(1,-1,-1),(1,1,-1)]
-        indices = [(0,2,3),(0,1,2),
-                   (1,7,2),(1,6,7),
-                   (6,5,4),(4,7,6),
-                   (3,4,5),(3,5,6),
-                   (3,7,4),(3,2,7),
-                   (0,6,1),(0,5,6)]
+        vertices = [
+            (-1, -1, 1), (1, -1, 1), (1, 1, 1), (-1, 1, 1),
+            (-1, -1, -1), (1, -1, -1), (1, 1, -1), (-1, 1, -1)
+        ]
+
+        indices = [
+            (0, 1, 2), (2, 3, 0),  # Front face
+            (1, 5, 6), (6, 2, 1),  # Right face
+            (7, 6, 5), (5, 4, 7),  # Back face
+            (4, 0, 3), (3, 7, 4),  # Left face
+            (4, 5, 1), (1, 0, 4),  # Bottom face
+            (3, 2, 6), (6, 7, 3)   # Top face
+        ]
         
         vertex_data = self.get_data(vertices,indices)
         
         ########################################################
 
-        tex_coord = [(0, 0), (1, 0), (1, 1), (0, 1)]
+        tex_coord = [
+            (0, 0), (1, 0), (1, 1), (0, 1)
+        ]
 
-        tex_coord_indices = [(0, 2, 3), (0, 1, 2),
-                            (0, 2, 3), (0, 1, 2),
-                            (0, 1, 2), (2, 3, 0),
-                            (2, 3, 0), (2, 0, 1),
-                            (0, 2, 3), (0, 1, 2),
-                            (3, 1, 2), (3, 0, 1)]
+        tex_coord_indices = [
+            (0, 1, 2), (2, 3, 0),
+            (0, 1, 2), (2, 3, 0),
+            (0, 1, 2), (2, 3, 0),
+            (0, 1, 2), (2, 3, 0),
+            (0, 1, 2), (2, 3, 0),
+            (0, 1, 2), (2, 3, 0)
+        ]
         
         tex_coord_data = self.get_data(tex_coord, tex_coord_indices)
 
