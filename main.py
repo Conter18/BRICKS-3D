@@ -4,6 +4,7 @@ import sys
 
 from model import *
 from camera import Camera
+from light import Light 
 
 class GraphicsEngine():
     def __init__(self, win_size=(1600,900)):
@@ -17,6 +18,9 @@ class GraphicsEngine():
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
 
         pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
+        #mouse settings
+        pg.event.set_grab(True)
+        pg.mouse.set_visible(False)
 
         self.ctx = mgl.create_context()
         self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
@@ -24,6 +28,8 @@ class GraphicsEngine():
         self.clock = pg.time.Clock()
         self.time = 0 
         self.delta_time = 0
+        #luz
+        self.light = Light()
         #camara
         self.camera = Camera(self)
         #escena
