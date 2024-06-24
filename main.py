@@ -1,7 +1,7 @@
 import pygame as pg
 import moderngl as mgl
 import sys 
-
+from light import light
 from model import *
 from camera import Camera
 
@@ -24,6 +24,8 @@ class GraphicsEngine():
         self.clock = pg.time.Clock()
         self.time = 0 
         self.delta_time = 0
+        #light
+        self.light = light()
         #camara
         self.camera = Camera(self)
         #escena
