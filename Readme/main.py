@@ -2,6 +2,7 @@ import pygame as pg
 import moderngl as mgl
 import sys
 from model import *
+from pygame import mixer
 from camera import Camera
 from light import Light
 from mesh import Mesh
@@ -42,6 +43,9 @@ class GraphicsEngine:
         self.scene = Scene(self)
         # renderer
         self.scene_renderer = SceneRenderer(self)
+        # souns
+        self.sound = pg.mixer.Sound('souns/bones.mp3')
+        self.sound.play(-1)
 
     def check_events(self):
         for event in pg.event.get():
@@ -62,6 +66,7 @@ class GraphicsEngine:
     def get_time(self):
         self.time = pg.time.get_ticks() * 0.001
 
+
     def run(self):
         while True:
             self.get_time()
@@ -69,6 +74,8 @@ class GraphicsEngine:
             self.camera.update()
             self.render()
             self.delta_time = self.clock.tick(60)
+
+
 
 
 if __name__ == '__main__':
