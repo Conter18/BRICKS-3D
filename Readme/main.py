@@ -9,7 +9,6 @@ from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
 
-
 class GraphicsEngine:
     def __init__(self, win_size=(1600, 900)):
         # init pygame modules
@@ -72,12 +71,16 @@ class GraphicsEngine:
             self.get_time()
             self.check_events()
             self.camera.update()
+            self.scene.update()  # Asegúrate de que la escena se actualice en cada iteración
             self.render()
             self.delta_time = self.clock.tick(60)
 
+<<<<<<< HEAD:Readme/main.py
 
 
 
+=======
+>>>>>>> 1bc8854b16c6cf418882fb2519deab96de6a873b:main.py
 if __name__ == '__main__':
     app = GraphicsEngine()
     app.run()

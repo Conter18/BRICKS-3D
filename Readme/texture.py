@@ -9,6 +9,7 @@ class Texture:
         self.ctx = app.ctx
         self.textures = {}
         self.textures[0] = self.get_texture(path='textures/madera.png')
+        self.textures['raqueta'] = self.get_texture(path='objects/ball/Pingpong_paddle/10519_Pingpong_paddle_v1_Diffuse.jpg')
         self.textures[1] = self.get_texture(path='textures/img.png')
         self.textures['cat'] = self.get_texture(path='objects/ball/10507_Golf Ball_v1.jpg')
         self.textures['skybox'] = self.get_texture_cube(dir_path='textures/skybox1/', ext='png')

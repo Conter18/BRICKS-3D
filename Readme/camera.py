@@ -9,7 +9,7 @@ SENSITIVITY = 0.04
 
 
 class Camera:
-    def __init__(self, app, position=(0, 0, 4), yaw=-90, pitch=0):
+    def __init__(self, app, position=(40, 0, 4), yaw=-90, pitch=0):
         self.app = app
         self.aspect_ratio = app.WIN_SIZE[0] / app.WIN_SIZE[1]
         self.position = glm.vec3(position)
@@ -41,8 +41,8 @@ class Camera:
         self.up = glm.normalize(glm.cross(self.right, self.forward))
 
     def update(self):
-        self.move()
-        self.rotate()
+        #self.move()
+        #self.rotate()
         self.update_camera_vectors()
         self.m_view = self.get_view_matrix()
 
@@ -63,7 +63,7 @@ class Camera:
             self.position -= self.up * velocity
 
     def get_view_matrix(self):
-        return glm.lookAt(self.position, self.position + self.forward, self.up)
-
+      return glm.lookAt(self.position, glm.vec3(10, -3, 0), self.up)
+    
     def get_projection_matrix(self):
         return glm.perspective(glm.radians(FOV), self.aspect_ratio, NEAR, FAR)
